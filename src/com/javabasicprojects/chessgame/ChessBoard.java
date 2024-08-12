@@ -54,4 +54,19 @@ public class ChessBoard {
             board[start.getRow()][start.getColumn()] = null;
         }
     }
+
+    public Piece getPiece(int row, int column) {
+        return board[row][column];
+    }
+
+    public Piece[][] getBoard() {
+        return board;
+    }
+
+    public void setPiece(int row, int column, Piece piece) {
+        board[row][column] = piece;
+        if (piece != null) {
+            piece.setPosition(new Position(row, column));
+        }
+    }
 }
