@@ -4,7 +4,7 @@ public abstract class Piece {
     protected Position position;
     protected PieceColor color;
 
-    public Piece(Position position, PieceColor color) {
+    public Piece(PieceColor color, Position position) {
         this.color = color;
         this.position = position;
     }
