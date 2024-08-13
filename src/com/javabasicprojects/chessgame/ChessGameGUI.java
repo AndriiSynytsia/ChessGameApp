@@ -73,7 +73,12 @@ public class ChessGameGUI extends JFrame {
     }
 
     private void checkGameState() {
+        PieceColor currentPlayer = game.getCurrentPlayerColor();
+        boolean inCheck = game.isInCheck(currentPlayer);
 
+        if (inCheck) {
+            JOptionPane.showMessageDialog(this, currentPlayer + "is in check!");
+        }
     }
 
     public static void main(String[] args) {
