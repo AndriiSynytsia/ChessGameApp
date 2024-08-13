@@ -2,6 +2,8 @@ package com.javabasicprojects.chessgame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +31,22 @@ public class ChessGameGUI extends JFrame {
     }
 
     private void initializeBoard() {
-
+        for (int row = 0; row < squares.length; row++) {
+            for (int col = 0; col < squares[row].length; col++) {
+                final int finalRow = row;
+                final int finalColumn = col;
+                ChessSquareComponent square = new ChessSquareComponent(row, col);
+                square.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        handleSquareClick(finalRow, finalColumn);
+                    }
+                });
+                add(square);
+                squares[row][col] = square;
+            }
+        }
+        refreshBoard();
     }
 
     private void refreshBoard() {
