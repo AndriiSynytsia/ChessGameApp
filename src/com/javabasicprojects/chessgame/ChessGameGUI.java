@@ -66,7 +66,10 @@ public class ChessGameGUI extends JFrame {
     }
 
     private void handleSquareClick(int row, int column) {
-
+        if (game.handleSquareSelection(row, column)) {
+            refreshBoard();
+            checkGameState();
+        }
     }
 
     private void checkGameState() {
