@@ -12,19 +12,19 @@ public class ChessGameGUI extends JFrame {
     private final ChessGame game = new ChessGame();
     private final Map<Class<? extends Piece>, String> pieceUnicodeMap = new HashMap<>() {
         {
-        put(Pawn.class, "\u265F");
-        put(Rook.class, "\u265C");
-        put(Knight.class, "\u265E");
-        put(Bishop.class, "\u265D");
-        put(Queen.class, "\u265B");
-        put(King.class, "\u265A");
+            put(Pawn.class, "\u265F");
+            put(Rook.class, "\u265C");
+            put(Knight.class, "\u265E");
+            put(Bishop.class, "\u265D");
+            put(Queen.class, "\u265B");
+            put(King.class, "\u265A");
         }
     };
 
     public ChessGameGUI() {
         setTitle("Chess Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(8,8));
+        setLayout(new GridLayout(8, 8));
         initializeBoard();
         pack(); // Adjust window size to fit the chessboard
         setVisible(true);
@@ -50,7 +50,19 @@ public class ChessGameGUI extends JFrame {
     }
 
     private void refreshBoard() {
-
+        ChessBoard board = game.getBoard();
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                Piece piece = board.getPiece(row, column);
+                if (piece != null) {
+                    String symbol = pieceUnicodeMap.get(piece.getClass());
+                    Color color = (piece.getPieceColor() == PieceColor.WHITE) ? Color.WHITE : Color.BLACK;
+                    squares[row][column].setPieceSymbol(symbol, color);
+                } else {
+                    squares[row][column].clearpiecesSymbol();
+                }
+            }
+        }
     }
 
     private void handleSquareClick(int row, int column) {
