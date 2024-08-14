@@ -67,9 +67,26 @@ public class ChessGameGUI extends JFrame {
     }
 
     private void handleSquareClick(int row, int column) {
-        if (game.handleSquareSelection(row, column)) {
+        boolean moveResult = game.handleSquareSelection(row, column);
+        clearHighlights();
+        if (moveResult) {
             refreshBoard();
             checkGameState();
+            checkGameOver();
+        } else if (game.isPieceSelected()) {
+            highlightLegalMoves(new Position(row, column));
+        }
+        refreshBoard();
+    }
+
+    private void checkGameOver() {
+        if (game.isCheckMate(game.getCurrentPlayerColor())) {
+            int response = JOptionPane.showConfirmDialog(this, "Checkmate! Would you like to play again?", "Game Over", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_NO_OPTION) {
+                resetGame();
+            } else {
+                System.exit(0);
+            }
         }
     }
 
@@ -82,11 +99,34 @@ public class ChessGameGUI extends JFrame {
         }
     }
 
-    public void highlightLegalMove(Position position) {
+    private void highlightLegalMoves(Position position) {
         List<Position> legalMoves = game.getLegalMovesForPieceAt(position);
         for (Position move : legalMoves) {
             squares[move.getRow()][move.getColumn()].setBackground(Color.GREEN);
         }
+    }
+
+    private void clearHighlights() {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                squares[row][column].setBackground((row + column) % 2 == 0 ? Color.LIGHT_GRAY : new Color(205, 133, 63));
+            }
+        }
+    }
+
+    private void addGameResetOption() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu gameMenu = new JMenu("Game");
+        JMenuItem resetItem = new JMenuItem("Reset");
+        resetItem.addActionListener(e -> resetGame());
+        gameMenu.add(resetItem);
+        menuBar.add(gameMenu);
+        setJMenuBar(menuBar);
+    }
+
+    private void resetGame() {
+        game.resetGame();
+        refreshBoard();
     }
 
     public static void main(String[] args) {
