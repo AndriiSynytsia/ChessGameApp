@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChessGameGUI extends JFrame {
@@ -59,7 +60,7 @@ public class ChessGameGUI extends JFrame {
                     Color color = (piece.getPieceColor() == PieceColor.WHITE) ? Color.WHITE : Color.BLACK;
                     squares[row][column].setPieceSymbol(symbol, color);
                 } else {
-                    squares[row][column].clearpiecesSymbol();
+                    squares[row][column].clearPieceSymbol();
                 }
             }
         }
@@ -78,6 +79,13 @@ public class ChessGameGUI extends JFrame {
 
         if (inCheck) {
             JOptionPane.showMessageDialog(this, currentPlayer + "is in check!");
+        }
+    }
+
+    public void highlightLegalMove(Position position) {
+        List<Position> legalMoves = game.getLegalMovesForPieceAt(position);
+        for (Position move : legalMoves) {
+            squares[move.getRow()][move.getColumn()].setBackground(Color.GREEN);
         }
     }
 
