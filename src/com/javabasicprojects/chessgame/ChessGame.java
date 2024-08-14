@@ -3,6 +3,7 @@ package com.javabasicprojects.chessgame;
 public class ChessGame {
     private ChessBoard board;
     private boolean whiteTurn = true;
+    private Position selectedPosition; // Track the currently selected piece's position
 
     public ChessGame() {
         this.board = new ChessBoard();
@@ -92,5 +93,35 @@ public class ChessGame {
     private boolean isPositionOnBoard(Position position) {
         return position.getRow() >= 0 && position.getRow() < board.getBoard().length &&
                 position.getColumn() >= 0 && position.getColumn() < board.getBoard()[0].length;
+    }
+
+    public ChessBoard getBoard() {
+        return this.board;
+    }
+
+    public boolean handleSquareSelection(int row, int column) {
+        if (selectedPosition == null) {
+            // Attempt to select a piece
+            Piece selectedPiece = board.getPiece(row, column);
+            if (selectedPiece != null && selectedPiece.getPieceColor() == (whiteTurn ? PieceColor.WHITE : PieceColor.BLACK)) {
+                selectedPosition = new Position(row, column);
+                return false;
+            }
+        } else {
+            // Attempt to move the selected piece
+            boolean moveMade = makeMove(selectedPosition, new Position(row, column));
+            selectedPosition = null;
+            return moveMade;
+        }
+        return false;
+    }
+
+    public PieceColor getCurrentPlayerColor() {
+        return whiteTurn ? PieceColor.WHITE : PieceColor.BLACK;
+    }
+
+    public void resetGame() {
+        this.board = new ChessBoard(); // Re-initialize the board
+        this.whiteTurn = true; // Reset turn to white
     }
 }
