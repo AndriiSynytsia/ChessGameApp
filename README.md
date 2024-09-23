@@ -4,13 +4,30 @@ Welcome to the **Chess Game Application**! This project is a fully-featured, Jav
 your local machine. Whether you're a beginner or an experienced player, this application offers a fun and challenging
 experience.
 
+## Resources
+This project was developed following the tutorial series from this YouTube playlist:
+[Complete Chess Game in Java](https://youtube.com/playlist?list=PLOJzCFLZdG4zk5d-1_ah2B4kqZSeIlWtt&si=suMZsn140Ro9GWzL)
+
 ## Features
 
-Comming soon...
-
+### Board Setup
+- **A standard 8x8 chessboard with alternating colors and proper initial placement of pieces (pawns, rooks, knights, bishops, queens, kings).**
+### Piece Movement: Implement the movement rules for each piece:
+- **Pawn: Moves forward but captures diagonally. Can move two squares on the first move.**
+- **Rook: Moves horizontally or vertically.**
+- **Knight: Moves in an "L" shape (two squares in one direction, one square in a perpendicular direction).**
+- **Bishop: Moves diagonally.**
+- **Queen: Moves horizontally, vertically, or diagonally.**
+- **King: Moves one square in any direction.**
+- **Turn-based System: Alternating turns between White and Black players.**
+- **Move Validation: Ensure moves are valid based on the rules (no moving through other pieces except for the knight, no moving into check, etc.).**
+- **Check/Checkmate Detection: Detect when a king is in check or checkmate.**
+- **En Passant: Special pawn capture move when a pawn moves two squares forward.**
+- **Pawn Promotion: Allow pawn promotion when reaching the opponent’s back rank (promotion to queen, rook, bishop, or knight).**
+- **Castling: Implement castling on both kingside and queenside, ensuring the conditions are met (no pieces between the king and rook, neither piece has moved, etc.).**
 ## Screenshots
 
-![Chess Game Screenshot](path/to/screenshot.png)
+![Chess Game Screenshot](images/chessgame.png)
 
 ## Getting Started
 
