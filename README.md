@@ -41,11 +41,11 @@ Follow these instructions to get the chess game up and running on your local mac
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/ChessGameApplication.git
+   git clone https://github.com/AndriiSynytsia/ChessGameApp.git
 
 2. **Navigate to the project directory**:
     ```bash
-    cd ChessGameApplication
+    cd ChessGameApp
 
 3. **Run application** using IDE which you prefer or compile an app using Java compiler:
 
