@@ -5,9 +5,14 @@ import com.javabasicprojects.chessgame.engine.pieces.Piece;
 public class OccupiedTile extends Tile {
     private final Piece pieceOnTile;
 
-    public OccupiedTile(int tileCoordinate, Piece pieceOnTile) {
+    OccupiedTile(int tileCoordinate, Piece pieceOnTile) {
         super(tileCoordinate);
         this.pieceOnTile = pieceOnTile;
+    }
+
+    @Override
+    public  String toString() {
+        return getPiece().getPieceAlliance().isBlack() ? getPiece().toString().toLowerCase() : getPiece().toString();
     }
 
     @Override
